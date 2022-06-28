@@ -1,0 +1,41 @@
+:host ::ng-deep p-card .bgcolor *{
+  
+    background-color:  #f5f3f4e7  !important;
+    color:#bb508ee7 !important ;
+   
+}
+
+:host ::ng-deep .sizes .p-button-sm {
+    background-color: #bb508ee7 !important;
+    margin-left: 10px;
+    border-color: #d8d3d6e7 !important;
+
+  
+ }
+ .custom-tabview::ng-deep *{
+    background-color:  #d49dc4e7 !important;
+    
+   
+}
+
+.custom-accordion{
+    background-color:  #f5f3f4e7  !important;
+}
+
+.div1-h2{
+    background-color: #bb508ee7 !important ; color: white !important; display: table !important; padding: 6px !important;
+ }
+
+ .custom-table2::ng-deep * {
+    background-color:  #f5f3f4e7  !important;
+  
+ }
+ 
+ .div1{
+   display: flex;
+               align-items: center;
+               justify-content: space-between
+}
+
+
+

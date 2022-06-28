@@ -1,0 +1,142 @@
+<p-table
+  #dt
+  class="custom-table2"
+  [value]="employeeData"
+  [rows]="5"
+  [paginator]="true"
+  [globalFilterFields]="[
+    'username',
+    'employee.name',
+    'employee.designation',
+    'employee.location'
+  ]"
+  responsiveLayout="scroll"
+  [rowHover]="true"
+  dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      <div class="div1"><h3 class="div1-h2" > Employee List</h3>
+
+        <span class="p-input-icon-left">
+          <i class="pi pi-search" style="color: white !important;"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+            placeholder="Search..."
+            class="p-inputtext-sm"
+          />
+        </span></div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th>Sr.No.</th>
+      <th pSortableColumn="name">Name</th>
+      <th pSortableColumn="designation">Designation</th>
+      <th pSortableColumn="location">Location</th>
+      <th>Details</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-element let-i="rowIndex">
+    <tr>
+      <td></td>
+      <td>{{ i + 1 }}</td>
+      <td>{{ element.name }}</td>
+      <td>{{ element.designation }}</td>
+      <td>{{ element.location }}</td>
+      <td>
+      <div class="btn">
+        <button
+        pButton
+        pRipple
+        icon="pi pi-info"
+        class="p-button-rounded p-button-success p-mr-2"
+        (click)="editEmployee(element)"
+      ></button>
+      </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      In total there are
+      {{ employeeData ? employeeData.length : 0 }} Employees..
+    </div>
+  </ng-template>
+</p-table>
+<p-dialog
+  [(visible)]="employeeDialogue"
+  [style]="{ width: '800px', backgroundColor: 'blue' }"
+  header="Employee Details"
+  [modal]="true"
+  styleClass="p-fluid"
+  class="custom-dialog"
+>
+  <ng-template pTemplate="content">
+    <p-card>
+    <div class="bootstrap-wraper">
+       
+        <div class="container">
+             
+            <div class="container text-center">
+                <img
+                ng
+                src="{{'data:image/jpg;base64,' + employee.profilePic}}"
+                onerror="this.src='https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'"
+             alt=""
+             class="profile-image"
+           />
+           <h2 style="color: rgba(221, 26, 68)">{{employee.name}}</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                 <!-- table Details -->
+                    <table class="table text-center">
+                        <tr>
+                            <td>Employee ID</td>
+                            <td>{{employee.username}}</td>
+                        </tr>
+                      
+                        <tr>
+                            <td>Designation</td>
+                            <td>{{employee.designation}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email Address</td>
+                            <td>{{employee.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Base/Location</td>
+                            <td>{{employee.location}}</td>
+                        </tr>
+                        <tr>
+                          <td>Department</td>
+                          <td>{{employee.department}}</td>
+                      </tr>
+                        <tr>
+                          <td>Reporting To</td>
+                          <td>{{employee.reportingTo}}</td>
+                      </tr>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </p-card>
+  </ng-template>
+  <ng-template pTemplate="footer">
+   
+  </ng-template>
+</p-dialog>
+<p-toast></p-toast>
+
+

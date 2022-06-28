@@ -1,0 +1,9 @@
+:host ::ng-deep .p-menubar {
+    background-color: white;
+  
+}
+
+:host ::ng-deep .p-button-link {
+    color: #bb508ee7!important;
+  
+}

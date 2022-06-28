@@ -1,0 +1,467 @@
+
+
+
+
+<div class="bootstrap-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 mt20">
+        <p-card styleClass="custom-card">
+          <div style="background-color: #f5f3f4e7; border-radius: 10px;">
+            <div class="row">
+              <img
+                src="{{ 'data:image/jpg;base64,' + profilePic }}"
+                onerror="this.src='https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'"
+                alt=""
+                class="profile-image"
+              />
+
+              <h1 style="color: #bb508ee7; margin-left: 10px">Profile Details!!</h1>
+            </div>
+          </div>
+          <form  (ngSubmit)="formSubmit(employee)">
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-user"></i>
+                </span>
+                <span class="p-float-label">
+                  <input type="text" class="form-control" id="name"
+                  required
+                  pInputText
+                  [(ngModel)]="employee.name" name="name"
+                  pattern="[A-Za-z ]{2,12}"
+                  #name="ngModel">
+                  <label for="inputgroup">Enter Email Id</label>
+                </span>
+               
+            
+                
+                
+              </div>
+              <div *ngIf="name.errors?.['required']" [hidden]="name.valid || name.pristine"
+                     class="alert alert-danger">
+                 Name is required
+                </div>
+                <div *ngIf="name.errors?.['pattern']" [hidden]="name.valid || name.pristine"
+                     class="alert alert-danger">
+                 Enter Valid name !!
+                </div>
+           
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-phone"></i>
+                </span>
+                <span class="p-float-label">
+                  <input
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    [(ngModel)]="employee.mobile"
+                 name="mobile"
+                    [ngClass]="{ 'is-invalid': submitted && f?.['mobile'].errors }"
+                  />
+                  <label for="inputgroup">Enter Mobile Number</label>
+                </span>
+              </div>
+              <div
+              *ngIf="submitted && f?.['mobile'].errors"
+              class="invalid-feedback"
+            >
+        
+              <div *ngIf="f?.['mobile'].errors?.['required']">
+                 Required Filed!
+              </div>
+              <div *ngIf="f?.['mobile'].errors?.['pattern']">Enter a valid mobile number !!</div>
+            </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-envelope"></i>
+                </span>
+                <span class="p-float-label">
+                  <input
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    [(ngModel)]="employee.email"
+                    name = "email"
+                    [ngClass]="{ 'is-invalid': submitted && f?.['email'].errors }"
+                  />
+                  <label for="inputgroup">Enter Email Id</label>
+                </span>
+              </div>
+              <div
+              *ngIf="submitted && f?.['email'].errors"
+              class="invalid-feedback"
+            >
+        
+              <div *ngIf="f?.['email'].errors?.['required']">
+                 Required Filed!
+              </div>
+              <div *ngIf="f?.['email'].errors?.['pattern']">Email must be a valid email address</div>
+            </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-id-card"></i>
+                </span>
+                <span class="p-float-label">
+                  <textarea
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="2"
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    name = "permanentAddress"
+                    [(ngModel)]="employee.permanentAddress"
+                    [ngClass]="{ 'is-invalid': submitted && f?.['permanentAddress'].errors }"
+                  >
+                  </textarea>
+                  <label for="inputgroup">Enter Permanent Address</label>
+                </span>
+              </div>
+              <div
+              *ngIf="submitted && f?.['permanentAddress'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f?.['permanentAddress'].errors?.['required']">
+                Required Filed!
+              </div>
+     
+            </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-id-card"></i>
+                </span>
+                <span class="p-float-label">
+                  <textarea
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="2"
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    name = "currentAddress"
+                    [(ngModel)]="employee.currentAddress"
+                    [ngClass]="{ 'is-invalid': submitted && f?.['currentAddress'].errors }"
+                  >
+                  </textarea>
+                  <label for="inputgroup">Enter Current Address</label>
+                </span>
+              </div>
+              <div
+              *ngIf="submitted && f?.['currentAddress'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f?.['currentAddress'].errors?.['required']">
+                Required Filed!
+              </div>
+     
+            </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-id-card"></i>
+                </span>
+                <span class="p-float-label">
+                  <input
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    [(ngModel)]="employee.username"
+                  name="username"
+                    readonly
+                  />
+                  <label for="inputgroup">Enter Employee Id</label>
+                </span>
+              </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-users"></i>
+                </span>
+                <span class="p-float-label">
+                  <input
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    [(ngModel)]="employee.designation"
+                    name = "designation"
+                    readonly
+                  />
+                  <label for="inputgroup">Enter Employee Designation</label>
+                </span>
+              </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40" hidden>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-id-card"></i>
+                </span>
+                <span class="p-float-label">
+                  <input
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    [(ngModel)]="employee.department"
+                    name = "department"
+                    readonly
+                  />
+                  <label for="inputgroup">Enter Employee Department</label>
+                </span>
+              </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-4 mt40">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon custom-color">
+                  <i class="pi pi-map-marker"></i>
+                </span>
+                <span class="p-float-label">
+                  <input
+                    type="text"
+                    id="inputgroup"
+                    pInputText
+                    [(ngModel)]="employee.location"
+                    name = "location"
+                    readonly
+                  />
+                  <label for="inputgroup">Enter Base/Location</label>
+                </span>
+              </div>
+            </div>
+
+            <div class="mt20 text-center">
+              <button
+                pButton
+                pRipple
+                type="submit"
+                label="Update"
+                class="p-button"
+                style="background-color: #d49dc4e7; border-color:#ffffffe7 ;"
+              ></button>
+            </div>
+          </form>
+
+        </p-card>
+      </div>
+
+      <div class="col-md-5 mt20">
+        <p-card  styleClass="custom-card">
+          <div>
+            <label for="dos"
+              ><div><strong style="color: #ffffffe7">Resume</strong></div></label
+            >
+            <hr />
+            <div class="p-inputgroup">
+              <input
+                class="mt10"
+                type="file"
+                pInputText
+                accept="application/pdf"
+                id="dos"
+                required
+                autofocus
+                (change)="selectFile($event)"
+              />
+
+              <button
+                pButton
+                pRipple
+                label="Upload"
+                icon="pi pi-upload"
+                class="p-button-text"
+                (click)="uploadFile()"
+                style="color: #ffffffe7"
+              ></button>
+            </div>
+          </div>
+
+          <div class="mt40">
+            <label for="dos"
+              ><strong style="color: #ffffffe7"
+                >Personal Identification</strong
+              ></label
+            >
+            <hr />
+
+            <div class="p-inputgroup">
+              <input
+                class="mt10"
+                type="file"
+                accept="application/pdf"
+                pInputText
+                id="dos1"
+                required
+                autofocus
+                (change)="selectFile($event)"
+              />
+
+              <button
+                pButton
+                pRipple
+                label="Upload"
+                icon="pi pi-upload"
+                class="p-button-text"
+                (click)="uploadFile()"
+                style="color: #ffffffe7"
+              ></button>
+            </div>
+          </div>
+
+          <div class="mt40">
+            <label for="dos"
+              ><strong style="color: #ffffffe7"
+                >Documents</strong
+              ></label
+            >
+            <hr />
+            <div class="p-inputgroup">
+              <input
+                class="mt10"
+                type="file"
+                accept="application/pdf"
+                pInputText
+                id="dos2"
+                required
+                autofocus
+                (change)="selectFile($event)"
+              />
+
+              <button
+                pButton
+                pRipple
+                label="Upload"
+                accept="application/pdf"
+                icon="pi pi-upload"
+                class="p-button-text"
+                (click)="uploadFile()"
+                style="color: #ffffffe7"
+              ></button>
+            </div>
+          </div>
+
+          <div class="mt40">
+            <label for="dos"
+              ><strong style="color: #ffffffe7"
+                >Employee Details Form</strong
+              ></label
+            >
+            <hr />
+            <div class="p-inputgroup">
+              <input
+                class="mt10"
+                type="file"
+                pInputText
+                accept="application/pdf"
+                id="dos2"
+                required
+                autofocus
+                (change)="selectFile($event)"
+              />
+
+              <button
+                pButton
+                pRipple
+                label="Upload"
+                icon="pi pi-upload"
+                class="p-button-text"
+                (click)="uploadDetailsForm()"
+                style="color: #ffffffe7"
+              ></button>
+            </div>
+          </div>
+            
+          <div class="mt40">
+            <label for="dos"
+              ><strong style="color: #ffffffe7"
+                >Official Documents</strong
+              ></label
+            >
+            <hr />
+            <div class="p-inputgroup">
+              <input
+                class="mt10"
+                type="text"
+                pInputText
+                accept="application/pdf"
+                id="dos2"
+                required
+                autofocus
+                value="{{ employee.fileName }}"
+                readonly
+              />
+
+              <button
+                pButton
+                pRipple
+                label="Download"
+                icon="pi pi-download"
+                class="p-button-text"
+                (click)="downloadFile(employee.fileName)"
+                style="color: #ffffffe7"
+              ></button>
+            </div>
+          </div>
+              
+          <div class="mt40">
+            <label for="dos"
+              ><strong style="color: #ffffffe7"
+                >Employee Details Form</strong
+              ></label
+            >
+          <hr />
+          <div class="p-inputgroup">
+            <input
+              class="mt10"
+              type="text"
+              pInputText
+              id="dos2"
+              required
+              autofocus
+              value="{{ employee.detailsFilename }}"
+              readonly
+            />
+
+            <button
+              pButton
+              pRipple
+              label="Download"
+              icon="pi pi-download"
+              class="p-button-text"
+              (click)="downloadDetailsForm(employee.detailsFilename)"
+              style="color: #ffffffe7;"
+            ></button>
+          </div>
+        </div>
+        </p-card>
+        <div class="mt20">
+          <p-card header=" Uploaded Docs!"  styleClass="custom-card">
+            <ul *ngFor="let item of documents">
+              <li style="color: black !important;" >{{ item.filename }}</li>
+            </ul>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

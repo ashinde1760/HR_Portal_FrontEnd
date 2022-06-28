@@ -1,0 +1,33 @@
+:host ::ng-deep p-card .custom-card{
+  
+   
+
+    margin-top: 50px;
+   color:white;
+    background-color: #bb508ee7 !important ;
+   
+}
+
+.custom-color{
+    background-color: #ffffffe7;
+    color: #bb508ee7;
+}
+.invalid-feedback::ng-deep *{
+  
+    color: wheat !important;
+   
+}
+
+:host ::ng-deep p-card .p-field{
+  
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.custom-table2::ng-deep * {
+    background-color:  #d49dc4e7  !important;
+    color: black !important;
+ 
+}

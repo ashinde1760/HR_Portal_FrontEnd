@@ -1,0 +1,51 @@
+
+.custom-table2::ng-deep * {
+    background-color:  #d49dc4e7  !important;
+    color: black !important;
+}
+.div1{
+    display: flex;
+                align-items: center;
+                justify-content: space-between
+}
+
+.div1-h2{
+    background-color: #bb508ee7 !important ; color: white !important; display: table !important; padding: 6px !important;
+}
+
+:host ::ng-deep .custom-btn * {
+    color: black !important;
+    background-color:#bb508ee7 !important ;
+    float: right !important;
+ 
+
+}
+:host ::ng-deep .btn * {
+    color: white !important;
+    background-color:#bb508ee7 !important ;
+    border-color: #d8d3d6e7 !important;
+ 
+
+}
+
+:host ::ng-deep label  {
+    color: #be3c88e7 !important;
+
+  
+ 
+
+}
+:host ::ng-deep input  {
+    color: rgb(128, 107, 107)!important;
+
+  
+ 
+
+}
+:host ::ng-deep button  {
+    color: white !important;
+background-color: #be6f9de7 !important;
+  
+ 
+
+}

@@ -1,0 +1,27 @@
+  
+
+.logo{
+  width: 60px;
+  margin: 10px;
+ 
+}
+
+::ng-deep .app-toolbar{
+    
+  background-color: #ffffffe7;
+ 
+}
+
+.p-button-secondary{
+  background-color: #bb508ee7 !important;
+  color: white !important;
+}
+::ng-deep .sidebar{
+    
+  background-color: #bb508ee7;
+  color:#e7cde0e7  ;
+ 
+}
+.custom-link{
+  color: white;
+}

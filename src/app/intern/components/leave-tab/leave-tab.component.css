@@ -1,0 +1,71 @@
+:host ::ng-deep .sizes .p-button-sm {
+ 
+    margin-top: 20px;
+    margin: 3px;
+}
+
+
+ 
+ .div1-h2{
+    color: white !important; display: table !important; padding: 6px !important;
+ }
+ 
+ .div1{
+    display: flex;
+                align-items: center;
+                justify-content: space-between
+ }
+ 
+
+
+ .custom-tabview::ng-deep *{
+    background-color:  #d49dc4e7 !important;
+    color: white;
+   
+}
+
+:host ::ng-deep .bgcolor * {
+    background-color: #bb508ee7!important;
+  
+}
+.custom-dropdown::ng-deep  *{
+  
+    background-color:#f5f3f4e7   !important;
+    color:#050003e7 !important ;
+  
+    border-color: #bb508ee7 !important;
+}
+
+.custom-cal::ng-deep  *{
+  
+    background-color:#f5f3f4e7  !important;
+    color:#050003e7 !important ;
+  
+
+}
+
+
+   .custom-table2::ng-deep * {
+    background-color:  #f5f3f4e7  !important;
+    color: black !important;
+ }
+ 
+
+.custom-dialog::ng-deep * {
+    background-color:  #f5f3f4e7  !important;
+    color: black !important;
+ }
+
+ .btn1::ng-deep * {
+  color: #f5f3f4e7  !important;
+    background-color: #bb508ee7!important;
+    border-color: #bb508ee7 !important;
+ }
+ 
+
+
+ .btn::ng-deep * {
+    color: #f5f3f4e7  !important;
+      background-color: #bb508ee7!important;
+      border-color: #bb508ee7 !important;
+   }

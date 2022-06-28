@@ -1,0 +1,225 @@
+<div class="bootstrap-wrapper">
+  <div class="conatiner">
+    <div style="display: flex; flex-direction: row-reverse; margin: 5px;">
+      <button pButton style="   color: white !important;
+      background-color: #bb508ee7 !important;
+      border-color: #d49dc4e7;" (click)="showBills()"  > History</button>
+    </div>
+    <div class="col-md-6 offset-md-3">
+      <p-card header="Add Details" styleClass="custom-card">
+        <form (ngSubmit)="submitBill()">
+         
+          <div class="row">
+
+            <div class="col-md-6">
+             
+              <div class="p-field">
+                <label for="currency-india">Amount</label>
+                <p-inputNumber
+                  name="amount"
+                  [(ngModel)]="bill.amount"
+                  mode="currency"
+                  inputId="currency-india"
+                  currency="INR"
+                  currencyDisplay="code"
+                  locale="en-IN"
+                  class="mt10"
+                  placeholder="Enter only numeric values"
+                >
+                </p-inputNumber>
+              </div>
+
+              <div class=" mt30" style="    display: flex;
+              flex-wrap: wrap;
+              justify-content: space-around;
+              flex-direction: column;">
+                <label for="reason" style="margin-bottom: 20px;">Nature</label>
+                <p-dropdown
+                optionLabel="type"
+                [options]="types"
+                placeholder="select a leave type"
+                [(ngModel)]="selectedNature"
+                name="naturetype"
+                class="custom-dropdown"
+                 
+              ></p-dropdown>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-field">
+                <label for="dos">Attachement File</label>
+                <input
+                  accept="application/pdf"
+                  class="mt10"
+                  name="attachement"
+                  type="file"
+                  pInputText
+                  id="dos"
+                  required
+                  autofocus
+                  (change)="selectFile($event)"
+                />
+    
+               
+              </div>
+
+              
+         
+          <div class="p-field mt30">
+            <label for="reason">Justification</label>
+            <textarea
+            rows="3"
+            cols="30"
+              name="reason"
+              [(ngModel)]="bill.reason"
+              class="mt10"
+              placeholder="Enter Justification/reason..."
+              type="text"
+              pInputText
+              inputId="reason"
+              required
+              autofocus
+            >
+            </textarea>
+          </div>
+
+            </div>
+          </div>
+
+         
+
+         
+
+         
+
+
+          <div class="mt40 row col-md-9 offset-md-3">
+            <button
+              pButton
+              label="Reset"
+              icon="pi pi-refresh"
+              class="p-button-sm"
+              type="reset"
+              style="
+                color: white !important;
+                background-color: #d49dc4e7 !important;
+                border-color: #d49dc4e7;
+              "
+            ></button>
+            <div class="ml20">
+              <button
+                pButton
+                label="Submit"
+                icon="pi pi-check"
+                class="p-button-sm"
+                type="submit"
+                style="
+                  color: white !important;
+                  background-color: #d49dc4e7 !important;
+                  border-color: #d49dc4e7;
+                "
+              ></button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog
+  [(visible)]="billsDialogue"
+  [style]="{ width: '1000px', height: '650px', backgroundColor: 'blue' }"
+  header="Bill Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="custom-table2">
+      <p-table
+      [value]="billsData"
+      [rows]="5"
+      [paginator]="true"
+      styleClass="p-datatable-sm"
+      responsiveLayout="scroll"
+      [globalFilterFields]="['filename']"
+      [rowHover]="true"
+      dataKey="id"
+      #dt
+    >
+   
+      <ng-template pTemplate="caption">
+        <div><h3 class="div1-h2">Bills</h3>
+         <span class="p-input-icon-left ml10">
+           <i style="color: white !important;" class="pi pi-search"></i>
+           <input
+             pInputText
+             type="text"
+             (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+             placeholder="Search..."
+             class="p-inputtext-sm"
+           />
+           </span>
+       
+   
+          </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr class="leave-header">
+          <th></th>
+         
+          <th>Sr.No.</th>
+          <th>Amount</th>
+          <th>Attachement</th>
+          <th>Nature</th>
+          <th>Justification</th>
+       
+          <th>Approve</th>
+          <th></th>
+          
+    
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-billsData let-i = "rowIndex">
+        <tr>
+          <td></td>
+          
+          <td>{{i+1}}</td>
+          <td> {{ billsData.amount|currency:'INR'}}</td>
+          <td> {{billsData.filename}}</td>
+          <td> {{billsData.nature}}</td>
+          <td>{{billsData.reason}}</td>
+
+          <td > <div *ngIf="billsData.approveOption === ''"><span>Pending</span></div>
+          {{billsData.approveOption}}
+          </td>
+          <td [ngStyle]="{display:'flex',alignItems:'center',justifyContent:'space-between'}"> 
+                    
+           <button
+           pButton
+           pRipple
+           label="Download"
+           icon="pi pi-download"
+           class="p-button-text"
+           (click)="downloadFile(billsData.filename)"
+           style="display: block;"
+         ></button>
+     </td>
+          
+        </tr>
+   
+   
+      </ng-template>
+  
+     </p-table>
+    </div>
+    <!-- <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button> -->
+  </ng-template>
+
+</p-dialog>
+<div>
+  {{billsData | json}}
+</div>

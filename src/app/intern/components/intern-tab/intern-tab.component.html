@@ -1,0 +1,61 @@
+<p-table
+class="custom-table2"
+  #dt
+  [value]="internData"
+  [rows]="5"
+  [paginator]="true"
+  [globalFilterFields]="[
+    'username',
+    'intern.name',
+    'intern.mentor',
+    'intern.location'
+  ]"
+  responsiveLayout="scroll"
+  [rowHover]="true"
+  dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      <div class="div1"><h3 class="div1-h2" > Intern List</h3>
+
+        <span class="p-input-icon-left">
+          <i class="pi pi-search" style="color: white !important;"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+            placeholder="Search..."
+            class="p-inputtext-sm"
+          />
+        </span></div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th>Sr.No.</th>
+      <th pSortableColumn="name">Name</th>
+
+      <th pSortableColumn="designation">Location</th>
+      <th pSortableColumn="location">Mentor</th>
+     
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-element let-i="rowIndex">
+    <tr>
+      <td></td>
+      <td>{{ i + 1 }}</td>
+      <td>{{ element.name }}</td>
+       <td>{{ element.location }}</td>
+      <td>{{ element.mentor}}</td>
+      
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      In total there are {{ internData ? internData.length : 0 }} Interns..
+    </div>
+  </ng-template>
+</p-table>

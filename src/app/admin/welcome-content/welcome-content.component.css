@@ -1,0 +1,79 @@
+::ng-deep .leave-header{
+
+    padding: 10px;
+}
+
+
+.ui-datepicker{
+    overflow: visible;
+    z-index: 999;
+  }
+
+  /* .custom-table::ng-deep th {
+    background-color:  #c273a1e7 !important;
+    color: black !important;
+} */
+
+
+.custom-accordion::ng-deep *{
+    background-color:  #d49dc4e7 !important;
+    color: white;
+   
+}
+
+/* :host ::ng-deep .btn .p-button-sm  {
+  
+    background-color: #bb508ee7 !important;
+ 
+  
+} */
+.btn::ng-deep *{
+    color: black !important;
+    background-color:#bb508ee7 !important ;
+    border-color: #d8d3d6e7 !important;
+ 
+
+}
+
+.custom-table2::ng-deep * {
+    background-color:  #d49dc4e7  !important;
+    color: black !important;
+ 
+ 
+}
+.div1{
+    display: flex;
+                align-items: center;
+                justify-content: space-between
+}
+
+.div1-h2{
+    background-color: #bb508ee7 !important ; color: white !important; display: table !important; padding: 6px !important;
+}
+
+:host ::ng-deep .custom-btn * {
+    color: black !important;
+    background-color:#bb508ee7 !important ;
+    float: right !important;
+    border-color: black !important;
+ 
+
+}
+:host ::ng-deep .btn1 * {
+    color: white !important;
+    background-color:#bb508ee7 !important ;
+    border-color: #d8d3d6e7 !important;
+  
+ 
+
+}
+
+
+::ng-deep .sidebar button *{
+    
+
+    color:white !important  ;
+   
+  }
+
+

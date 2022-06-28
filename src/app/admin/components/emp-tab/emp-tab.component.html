@@ -1,0 +1,441 @@
+<div class="custom-table2">
+  <p-table
+  #dt
+  [value]="employeeData"
+  [rows]="5"
+  [paginator]="true"
+  [globalFilterFields]="[
+    'username',
+    'employee.name',
+    'employee.designation',
+    'employee.location'
+  ]"
+  responsiveLayout="scroll"
+  [rowHover]="true"
+  dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between" width="100%">
+      <div class="div1"><h3 class="div1-h2" > Employee List</h3>
+
+        <span class="p-input-icon-left">
+          <i class="pi pi-search" style="color: white !important;"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+            placeholder="Search..."
+            class="p-inputtext-sm"
+          />
+        </span></div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th>Sr.No.</th>
+      <th pSortableColumn="name">Name</th>
+      <th pSortableColumn="designation">Designation</th>
+      <th pSortableColumn="location">Location</th>
+      <th>Action's</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-element let-i="rowIndex">
+    <tr>
+      <td></td>
+      <td>{{ i + 1 }}</td>
+      <td>{{ element.name }}</td>
+      <td>{{ element.designation }}</td>
+      <td>{{ element.location }}</td>
+      <td>
+       <div class="btn">
+        <button
+        pButton
+        pRipple
+        icon="pi pi-pencil"
+        class="p-button-rounded  p-mr-2"
+        (click)="editEmployee(element)"
+      ></button>
+
+      &nbsp;
+      <button
+        pButton
+        pRipple
+        icon="pi pi-trash"
+        class="p-button-rounded "
+        (click)="deleteEmployee(element.id)"
+      ></button>
+       </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      In total there are
+      {{ employeeData ? employeeData.length : 0 }} Employees..
+    </div>
+  </ng-template>
+</p-table>
+</div>
+<p-dialog
+  [(visible)]="employeeDialogue"
+  [style]="{ width: '1000px', height: '1000px', backgroundColor: 'blue' }"
+  [modal]="true"
+  header="Employee Details!!"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <p-tabView styleClass="tabview-custom">
+      <p-tabPanel>
+        <ng-template pTemplate="header">
+          <i style="color: #bb508ee7;" class="pi pi-user"></i>
+          <span style="color: #bb508ee7; margin-left: 4px">Profile</span>
+        </ng-template>
+        <!-- new -->
+       
+  <div class="bootstrap-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <img
+            ng
+            src="{{ 'data:image/jpg;base64,' + employee.profilePic }}"
+                onerror="this.src='https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'"
+            alt=""
+            class="profile-image"
+          />
+          <div>
+            <h2>
+              {{ employee.name }}
+              <br />
+              <span>({{ employee.location }})</span>
+            </h2>
+          </div>
+        </div>
+    
+        <div class="col-md-8">
+          <form [formGroup]="updateForm" (ngSubmit)="updateEmployee()">
+          <div class="grid p-fluid">
+            <div class="custom">
+              <div >
+                <div  class="mb4"><strong>Name</strong></div>
+      
+                <input
+                
+                  placeholder="Name"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="employee.name"
+                  class="p-inputtext-sm"
+                  style="color: black !important;"
+                  formControlName="name"
+                  [ngClass]="{ 'is-invalid': submitted && f?.['name'].errors }"
+                />
+              </div>
+            </div>
+            <div
+            *ngIf="submitted && f?.['name'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f?.['name'].errors?.['required']">
+              Required Filed!
+            </div>
+   
+          </div>
+          </div>
+
+          <div class="grid p-fluid mt20">
+            <div class="custom">
+              <div>
+                <div class="mb4"><strong>Mobile</strong></div>
+
+                <div></div>
+                <input
+              
+                  placeholder="Name"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="employee.mobile"
+                  class="p-inputtext-sm"
+                  style="color: black !important;"
+                  formControlName="mobile"
+                  [ngClass]="{ 'is-invalid': submitted && f?.['mobile'].errors }"
+                />
+              </div>
+            </div>
+            <div
+            *ngIf="submitted && f?.['mobile'].errors"
+            class="invalid-feedback"
+          >
+      
+            <div *ngIf="f?.['mobile'].errors?.['required']">
+               Required Filed!
+            </div>
+            <div *ngIf="f?.['mobile'].errors?.['pattern']">Enter a valid mobile number !!</div>
+          </div>
+          </div>
+          <div class="grid p-fluid mt20">
+            <div class="custom">
+              <div >
+                <div class="mb4"><strong>Email</strong></div>
+            
+
+                <div></div>
+                <input
+                
+                  placeholder="Name"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="employee.email"
+                  class="p-inputtext-sm"
+                  style="color: black !important;"
+                  formControlName="email"
+                  [ngClass]="{ 'is-invalid': submitted && f?.['email'].errors }"
+                />
+              </div>
+            </div>
+            <div
+            *ngIf="submitted && f?.['email'].errors"
+            class="invalid-feedback"
+          >
+      
+            <div *ngIf="f?.['email'].errors?.['required']">
+               Required Filed!
+            </div>
+            <div *ngIf="f?.['email'].errors?.['pattern']">Email must be a valid email address</div>
+          </div>
+          </div>
+          <div class="grid p-fluid mt20">
+            <div class="custom">
+              <div>
+                <div class="mb4">
+                  <strong>Designation</strong>
+                </div>
+                <div></div>
+                <input
+            
+                  placeholder="Name"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="employee.designation"
+                  class="p-inputtext-sm"
+                  style="color: black !important;"
+                  formControlName="designation"
+                  [ngClass]="{ 'is-invalid': submitted && f?.['designation'].errors }"
+                />
+              </div>
+            </div>
+            <div
+            *ngIf="submitted && f?.['designation'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f?.['designation'].errors?.['required']">
+              Required Filed!
+            </div>
+   
+          </div>
+          </div>
+
+          <div class="grid p-fluid mt20">
+            <div class="custom">
+              <div >
+                <div class="mb4"><strong>Department</strong></div>
+                <div></div>
+                <input
+                 
+                  placeholder="Name"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="employee.department"
+                  class="p-inputtext-sm"
+                  style="color: black !important;"
+                  formControlName="department"
+                  [ngClass]="{ 'is-invalid': submitted && f?.['department'].errors }"
+                />
+              </div>
+            </div>
+            <div
+            *ngIf="submitted && f?.['designation'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f?.['designation'].errors?.['required']">
+              Required Filed!
+            </div>
+   
+          </div>
+          </div>
+
+          <div class="grid p-fluid mt20">
+            <div class="custom">
+              <div >
+                <div class="mb4"><strong>Reporting To</strong></div>
+                <div></div>
+                <input
+                 
+                  placeholder="Name"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="employee.reportingTo"
+                  class="p-inputtext-sm"
+                  style="color: black !important;"
+                  formControlName="reportingTo"
+                  [ngClass]="{ 'is-invalid': submitted && f?.['reportingTo'].errors }"
+                />
+              </div>
+            </div>
+            <div
+            *ngIf="submitted && f?.['reportingTo'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f?.['reportingTo'].errors?.['required']">
+              Required Filed!
+            </div>
+   
+          </div>
+          </div>
+          <div class="grid p-fluid mt20">
+            <div class="custom">
+              <div >
+                <div class="mb4"><strong>Location</strong></div>
+
+
+                <div></div>
+                <input
+               
+                  placeholder="Name"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="employee.location"
+                  class="p-inputtext-sm"
+                  style="color: black !important;"
+                  formControlName="location"
+                  [ngClass]="{ 'is-invalid': submitted && f?.['location'].errors }"
+                />
+              </div>
+            </div>
+            <div
+            *ngIf="submitted && f?.['location'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f?.['location'].errors?.['required']">
+              Required Filed!
+            </div>
+   
+          </div>
+          </div>
+         
+
+          <div class="row mt20 ml20">
+     
+            <div>  <p-button
+            
+            
+              label="Cancel"
+              icon="pi pi-times"
+              styleClass="p-button-sm"
+              (onClick)="hideDialog()"
+              class="btn"
+            ></p-button></div>
+           
+           
+             <div class="ml20">
+              <p-button
+          
+
+              type="submit"
+              label="Update"
+              icon="pi pi-check"
+              styleClass="p-button-sm"
+            
+              class="btn"
+            ></p-button>
+             </div>
+            
+          </div>
+        </form>
+        </div>
+    
+      </div>
+      <br />
+    </div>
+  </div>
+      </p-tabPanel>
+      <p-tabPanel header="Header II">
+        <ng-template pTemplate="header">
+          <i style="color: #bb508ee7" class="pi pi-file"></i>
+          <span style="color: #bb508ee7; margin-left: 4px"
+            >Documentation</span
+          >
+        </ng-template>
+        <!-- Documentation -->
+        <div class="bootstrap-wrapper">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-7">
+                <div class="mt20">
+                  <p-card header=" Download Files!" class="custom-card">
+                    <ul *ngFor="let item of documents">
+                      <li class="sizes">
+                        <div
+                          class="row"
+                           style=" display: flex; justify-content: space-evenly;
+                      
+                          align-items: center;"
+                        >
+                       <div>   {{ item.filename }}</div>
+                          <div><p-button
+                            styleClass="p-button-sm"
+                            icon="pi pi-download"
+                            (click)="downloadFile(item.filename)"
+                          >
+                          </p-button></div>
+                        </div>
+                      </li>
+                    </ul>
+                  </p-card>
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="mt20">
+                  <p-card header=" Upload Details Form!!" class="custom-card"> 
+                   
+               
+                  <input
+                  class="p-inputtext-sm"
+                  type="file"
+                  accept="application/pdf"
+                  pInputText
+                  id="dos"
+                  required
+                  autofocus
+                  (change)="selectFile($event)"
+                />
+          
+                <button
+                  pButton
+                  (click)="uploadDetailsForm(employee.id)"
+                  pRipple
+                  label="Upload"
+                  icon="pi pi-upload"
+                  class="p-button-text"
+                  style="color: #580335e7 !important;display: block; margin-top: 10px;"
+                
+                ></button>
+             
+              </p-card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <!-- <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button> -->
+  </ng-template>
+</p-dialog>
+<p-toast></p-toast>

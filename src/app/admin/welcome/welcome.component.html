@@ -1,0 +1,53 @@
+<div class="app-container">
+    <div class="navv">
+        <p-toolbar styleClass="app-toolbar" >
+
+            <div class="p-toolbar-group-left" class="p-toolbar-group-left">    
+                <img src="\assets\AnemoiLogo.jfif" alt="" class="logo"> 
+                <h2> 
+                    ANEMOI TECHNOLOGIES
+                    </h2>    
+                  
+          &nbsp;
+         
+             </div>
+             <button pButton class="p-button-secondary" (click)="snav = true"  icon="pi pi-bars">
+            </button>
+        </p-toolbar>
+    </div>
+   
+    <p-sidebar styleClass="sidebar" class="app-sidenav-container" [(visible)]="snav">
+     
+        <div class="menuItem">
+            <hr>
+            <h3> <i class="pi pi-user" style="font-size: 20px;"></i> &nbsp;<a [routerLink]="['/admin/welContent']" (click)="snav = false" class="custom-link">Welcome,Admin</a></h3>
+            <hr>
+            <h3> <i class="pi pi-users" style="font-size: 20px;"></i> &nbsp;<a [routerLink]="['/admin/employee']"   (click)="snav = false" class="custom-link">Employee</a></h3>
+            <hr>
+            <h3> <i class="pi pi-users" style="font-size: 20px;"></i> &nbsp;<a  [routerLink]="['/admin/intern']" (click)="snav = false" class="custom-link" >Intern</a></h3>
+            <hr>
+            <h3> <i class="pi pi-briefcase" style="font-size: 20px;"></i> &nbsp;<a  [routerLink]="['/admin/projects']"  (click)="snav = false" class="custom-link" >Projects</a></h3>
+            <hr>
+            <h3> <i class="pi pi-envelope" style="font-size: 20px;"></i> &nbsp;<a [routerLink]="['/admin/leave']" (click)="snav = false" class="custom-link" >Leave</a></h3>
+            <hr>
+            <h3> <i class="pi pi-book" style="font-size: 20px;"></i> &nbsp;<a  [routerLink]="['/admin/report']" (click)="snav = false" class="custom-link" >Report</a></h3>
+            <hr>
+            <h3> <i class="pi pi-calendar-plus" style="font-size: 20px;"></i> &nbsp;<a [routerLink]="['/admin/joiningdate']" (click)="snav = false" class="custom-link" >Date Of Joining</a></h3>
+            <hr>
+            <h3> <i class="pi pi-file" style="font-size: 20px;"></i> &nbsp;<a [routerLink]="['/admin/documents']" (click)="snav = false" class="custom-link" >Documentation</a></h3>
+            <hr>
+            <h3> <i class="pi pi-briefcase" style="font-size: 20px;"></i> &nbsp;<a (click)="snav = false" class="custom-link" >Policies</a></h3>
+            <hr>
+            <h3> <i class="pi pi-book" style="font-size: 20px;"></i> &nbsp;<a  [routerLink]="['/admin/register']"  (click)="snav = false" class="custom-link" >Registration</a></h3>
+            <hr> 
+            <h3> <i class="pi pi-id-card" style="font-size: 20px;"></i> &nbsp;<a [routerLink]="['/admin/review']" (click)="snav = false" class="custom-link" >Review</a></h3>
+            <hr>
+            <h3> <i class="pi pi-sign-out" style="font-size: 20px;"></i> &nbsp;<a (click)="logout()" [routerLink]="['/auth']" class="custom-link" >Sign out</a></h3>
+            <hr>
+        </div>
+    </p-sidebar>
+
+    <div class="router-outlet-container">
+        <router-outlet></router-outlet>
+    </div>
+</div>

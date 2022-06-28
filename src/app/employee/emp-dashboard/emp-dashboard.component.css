@@ -1,0 +1,33 @@
+.profile-image{
+    max-width: 80px;
+    max-height: 80px;
+    border: 1px solid black;
+      border-radius: 50%;
+    text-align: center;
+    margin-left: 10px;
+    margin: 5px;
+  }
+
+  .custom-color{
+    background-color: #ffffffe7;
+    color: #bb508ee7;
+}
+
+.row{
+  margin-left: 0px;
+}
+
+:host ::ng-deep p-card .custom-card{
+  
+  background-color: #bb508ee7;
+  color: white;
+ 
+}
+
+:host ::ng-deep p-card  .p-inputgroup  label {
+  
+ 
+  color: rgb(102, 95, 95)!important ;
+ 
+} 
+

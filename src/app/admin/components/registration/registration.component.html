@@ -1,0 +1,595 @@
+<div class="card">
+  <p-tabView styleClass="tabview-custom" class="custom-tabview">
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <i style="color: white; " class="pi pi-user"></i>
+        <span style="color: white; margin-left: 4px;  ">Employee</span>
+      </ng-template>
+      <div class="bootstrap-wrapper"  >
+        <div class="container">
+          <p-card
+            class="text-center"
+     
+            header="Register Here!!!"
+            styleClass="bgcolor"
+       
+          >
+            <hr />
+            <form [formGroup]="registerForm" (ngSubmit)="formSubmit()" >
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user.employee.name"
+                          formControlName="name"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['name'].errors }"
+                        />
+                       
+                        <label for="inputgroup">Enter Name</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted && f?.['name'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f?.['name'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-phone"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user.employee.mobile"
+                          name="mobile"
+                          formControlName="mobile"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['mobile'].errors }"
+                        />
+                       
+                        <label for="inputgroup">Enter Mobile Number</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted && f?.['mobile'].errors"
+                    class="invalid-feedback"
+                  >
+              
+                    <div *ngIf="f?.['mobile'].errors?.['required']">
+                       Required Filed!
+                    </div>
+                    <div *ngIf="f?.['mobile'].errors?.['pattern']">Enter a valid mobile number !!</div>
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-envelope"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          class="form-control"
+                          formControlName="email"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['email'].errors }"
+                        />
+                 
+                      
+                        <label for="inputgroup">Enter Email Id</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted && f?.['email'].errors"
+                    class="invalid-feedback"
+                  >
+              
+                    <div *ngIf="f?.['email'].errors?.['required']">
+                       Required Filed!
+                    </div>
+                    <div *ngIf="f?.['email'].errors?.['pattern']">Email must be a valid email address</div>
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-id-card"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user.username"
+                          name="username"
+                          formControlName="username"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['username'].errors }"
+                        />
+                        <label for="inputgroup">Enter Employee Id</label>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                  *ngIf="submitted && f?.['username'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f?.['username'].errors?.['required']">
+                    Required Filed!
+                  </div>
+         
+                </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-map-marker"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user.employee.location"
+                          name="location"
+                          formControlName="location"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['location'].errors }"
+                        />
+                        <label for="inputgroup">Enter Base/Location</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted && f?.['location'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f?.['location'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-users"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                     
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user.employee.designation"
+                          name="designation"
+                          formControlName="designation"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['designation'].errors }"
+                        />
+                        <label for="inputgroup"
+                          >Enter Employee Designation</label
+                        >
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted && f?.['designation'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f?.['designation'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-id-card"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user.employee.department"
+                          name="department"
+                          formControlName="department"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['department'].errors }"
+                        />
+                        <label for="inputgroup"
+                          >Enter Employee Department</label
+                        >
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted && f?.['designation'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f?.['designation'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-key"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="password"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user.password"
+                          name="password"
+                          formControlName="password"
+                          [ngClass]="{ 'is-invalid': submitted && f?.['password'].errors }"
+                        />
+                      
+                        <label for="inputgroup">Enter password</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted && f?.['password'].errors"
+                    class="invalid-feedback"
+                  >
+              
+                    <div *ngIf="f?.['password'].errors?.['required']">
+                       Required Filed!!
+                    </div>
+                    <div *ngIf="f?.['password'].errors?.['pattern']"><span>must be 8 char,Uppercase,Lowercase and one Speical Char!!</span></div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 offset-md-3">
+                <div class="mt40 text-center">
+                  <p-button
+       
+                  label="Register"
+                  icon="pi pi-check"
+                   type="submit"
+                  class="custom-btn "
+                  
+                ></p-button>
+                <p-button
+       
+                label="Reset"
+                icon="pi pi-refresh"
+                 type="reset"
+                class="custom-btn ml20"
+                
+              ></p-button>
+                </div>
+              </div>
+            </form>
+          </p-card>
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <!-- for interns registration -->
+    <p-tabPanel header="Header II">
+      <ng-template pTemplate="header">
+        <i style="color: white; " class="pi pi-user"></i>
+        <span style="color: white; margin-left: 4px;  ">Intern</span>
+      </ng-template>
+      <div class="bootstrap-wrapper">
+        <div class="container">
+          <p-card
+            class="text-center"
+          
+            header="Register Here!!!"
+            styleClass="bgcolor"
+          >
+            <hr />
+            <form [formGroup]="registerInternForm" (ngSubmit)="formSubmitIntern()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.intern.name"
+                        formControlName="name"
+                        [ngClass]="{ 'is-invalid': submitted1 && f1?.['name'].errors }"
+                        />
+                        <label for="inputgroup">Enter Name</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['name'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f1?.['name'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-phone"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.intern.mobile"
+                          formControlName="mobile"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['mobile'].errors }"
+                        />
+                        <label for="inputgroup">Enter Mobile Number</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['mobile'].errors"
+                    class="invalid-feedback"
+                  >
+              
+                    <div *ngIf="f1?.['mobile'].errors?.['required']">
+                       Required Filed!
+                    </div>
+                    <div *ngIf="f1?.['mobile'].errors?.['pattern']">Enter a valid mobile number !!</div>
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-envelope"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.intern.email"
+                          formControlName="email"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['email'].errors }"
+                        />
+                        <label for="inputgroup">Enter Email Id</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['email'].errors"
+                    class="invalid-feedback"
+                  >
+              
+                    <div *ngIf="f1?.['email'].errors?.['required']">
+                       Required Filed!
+                    </div>
+                    <div *ngIf="f1?.['email'].errors?.['pattern']">Email must be a valid email address</div>
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-id-card"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.username"
+                          formControlName="username"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['username'].errors }"
+                        />
+                        <label for="inputgroup">Enter Intern Id</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['username'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f1?.['username'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-map-marker"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.intern.address"
+                          formControlName="address"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['address'].errors }"
+                        />
+                        <label for="inputgroup">Enter Address</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['address'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f1?.['address'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+                 
+                </div>
+                <div class="col-md-6">
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-map-marker"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.intern.location"
+                          formControlName="location"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['location'].errors }"
+                        />
+                        <label for="inputgroup">Enter Base/Location</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['location'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f1?.['location'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-users"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.intern.projectname"
+                          formControlName="projectname"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['projectname'].errors }"
+                        />
+                        <label for="inputgroup"
+                          >Enter intern project name</label
+                        >
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['projectname'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f1?.['projectname'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-id-card"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.intern.mentor"
+                           formControlName="mentor"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['mentor'].errors }"
+                        />
+                        <label for="inputgroup">Enter intern mentor</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['mentor'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f1?.['mentor'].errors?.['required']">
+                      Required Filed!
+                    </div>
+           
+                  </div>
+                  </div>
+
+                  <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon custom-color">
+                        <i class="pi pi-key"></i>
+                      </span>
+                      <span class="p-float-label">
+                        <input
+                          type="password"
+                          id="inputgroup"
+                          pInputText
+                          [(ngModel)]="user1.password"
+                          formControlName="password"
+                          [ngClass]="{ 'is-invalid': submitted1 && f1?.['password'].errors }"
+                        />
+                        <label for="inputgroup">Enter password</label>
+                      </span>
+                    </div>
+                    <div
+                    *ngIf="submitted1 && f1?.['password'].errors"
+                    class="invalid-feedback"
+                  >
+              
+                    <div *ngIf="f1?.['password'].errors?.['required']">
+                       Required Filed!!
+                    </div>
+                    <div *ngIf="f1?.['password'].errors?.['pattern']"><span>must be 8 char,Uppercase,Lowercase and one Speical Char!!</span></div>
+                  </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-6 offset-md-3">
+                <div class="mt40 text-center">
+                  <p-button
+       
+                  label="Register"
+                  icon="pi pi-check"
+                   type="submit"
+                  class="custom-btn "
+                  
+                ></p-button>
+                <p-button
+       
+                label="Reset"
+                icon="pi pi-refresh"
+                 type="reset"
+                class="custom-btn ml20"
+                
+              ></p-button>
+                </div>
+              </div>
+            </form>
+          </p-card>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

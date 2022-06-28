@@ -1,0 +1,42 @@
+:host ::ng-deep .sizes .p-button-sm {
+    background-color: rgba(221, 26, 68);
+  
+}
+
+:host ::ng-deep .btn .p-button-sm {
+    background-color: rgb(17, 135, 190);
+  
+}
+
+.custom-accordion::ng-deep *{
+    background-color:  #d49dc4e7 !important;
+    color: white;
+   
+}
+.custom-table2::ng-deep * {
+    background-color:  #f5f3f4e7  !important;
+    color: black !important;
+ }
+
+ .div1-h2{
+    background-color: #bb508ee7 !important ; color: white !important; display: table !important; padding: 6px !important;
+ }
+ 
+ .div1{
+    display: flex;
+                align-items: center;
+                justify-content: space-between
+ }
+
+ .custom-panel::ng-deep *{
+    background-color:  #f5f3f4e7  !important;
+    color: black !important;
+
+
+   
+}
+.btn::ng-deep * {
+    color: white !important;
+      background-color: #bb508ee7!important;
+      border-color: #bb508ee7 !important;
+   }

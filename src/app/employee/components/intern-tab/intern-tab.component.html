@@ -1,0 +1,265 @@
+
+<p-dialog
+
+[(visible)]="internDialogue"
+[style]="{ width: '700px' }"
+header="INTERN DETAILS"
+[modal]="true"
+styleClass="p-fluid"
+class="custom-dialog"
+>
+<ng-template pTemplate="content">
+  <p-card>
+    <div class="bootstrap-wraper">
+       
+        <div class="container">
+             
+            <div class="container text-center">
+                <img
+                src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+             alt=""
+             class="profile-image"
+           />
+           <h2 style="color: rgba(221, 26, 68)">{{intern.name}}</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                 <!-- table Details -->
+                    <table class="table text-center">
+                        <tr>
+                            <td>Intern ID</td>
+                            <td>{{intern.username}}</td>
+                        </tr>
+                        <tr>
+                            <td>Base/Location</td>
+                            <td>{{intern.location}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email Address</td>
+                            <td>{{intern.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mentor</td>
+                            <td>{{intern.mentor}}</td>
+                        </tr>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </p-card>
+</ng-template>
+<ng-template pTemplate="footer">
+
+  <!-- <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button> -->
+</ng-template>
+</p-dialog>
+<p-toast></p-toast>
+
+
+
+
+<p-table
+  #dt
+  class="custom-table2"
+  [value]="internData"
+  [rows]="5"
+  [paginator]="true"
+  [globalFilterFields]="[
+    'username',
+    'intern.name',
+    'intern.mentor',
+    'intern.location'
+  ]"
+  responsiveLayout="scroll"
+  [rowHover]="true"
+  dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      <div class="div1"><h3 class="div1-h2" > Intern List</h3>
+
+        <span class="p-input-icon-left">
+          <i class="pi pi-search" style="color: white !important;"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+            placeholder="Search..."
+            class="p-inputtext-sm"
+          />
+        </span></div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th>Sr.No.</th>
+      <th pSortableColumn="name">Name</th>
+
+      <th pSortableColumn="designation">Location</th>
+      <th pSortableColumn="location">Mentor</th>
+      <th>Details</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-element let-i="rowIndex">
+    <tr>
+      <td></td>
+      <td>{{ i + 1 }}</td>
+      <td>{{ element.name }}</td>
+       <td>{{ element.location }}</td>
+      <td>{{ element.mentor}}</td>
+      <td>
+    <div class="btn">    <button
+      pButton
+      pRipple
+      icon="pi pi-info"
+      class="p-button-rounded p-button-success p-mr-2"
+      (click)="editIntern(element)"
+    ></button></div>
+
+       
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      In total there are {{ internData ? internData.length : 0 }} Interns..
+    </div>
+  </ng-template>
+</p-table>
+
+
+<!-- 
+<div *ngIf="internDetails" class="bootstrap-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt40">
+        <p-card class="text-center" header="Intern Details">
+          <hr />
+          <form (ngSubmit)="updateIntern(intern,intern.intern.id)">
+          <div class="row mt20 ml40 ">
+      <input type="text" value="{{intern.userId}}" hidden >
+            <div class="mt10 "><strong>Name</strong></div>
+               &nbsp;  &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+              
+                <div><input name="name" placeholder="Name" pInputText type="text" value="{{ intern?.intern?.name }}" class="p-inputtext-sm"></div>
+             </div>
+
+         <div class="row mt20 ml40 ">
+         <div class="mt10 "><strong>Intern Id</strong></div>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+             <div><input name="username" placeholder="Intern Id" pInputText type="text" value="{{ intern?.username }}" class="p-inputtext-sm"></div>
+          </div>
+          
+          <div class="row mt20 ml40 ">
+            <div class="mt10 "><strong>Contact No.</strong></div>
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               
+                <div><input name="mobile" placeholder="Mobile" pInputText type="text" value="{{ intern?.intern?.mobile }}" class="p-inputtext-sm"></div>
+             </div>
+
+             <div class="row mt20 ml40 ">
+                <div class="mt10 "><strong>Email</strong></div>
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                   &nbsp;
+                    <div><input name="email" placeholder="Email" pInputText type="text" value="{{ intern?.intern?.email }}" class="p-inputtext-sm"></div>
+                 </div>
+    
+
+          <div class="row mt20 ml40">
+            <div class="mt10"><strong>Address</strong></div>
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+               &nbsp;
+                <div><input name="address" placeholder="Address" pInputText type="text" value="{{ intern?.intern?.address }}" class="p-inputtext-sm"></div>
+             </div>
+            
+      
+             <div class="row mt20 ml40">
+              <div class="mt10"><strong>Mentor</strong></div>
+                 &nbsp;
+                 &nbsp;
+                 &nbsp;
+                 &nbsp;
+                 &nbsp;
+                 &nbsp;
+                 &nbsp;
+                 &nbsp;
+              
+                  <div><input name="mentor" placeholder="Mentor" pInputText type="text" value="{{ intern?.intern?.mentor}}" class="p-inputtext-sm"></div>
+               </div>
+
+               
+          <div class="row mt20 ml40">
+            <div class="mt10"><strong>Project Name</strong></div>
+               &nbsp;
+               &nbsp;
+               &nbsp;
+           
+             
+                <div><input name="projectname" placeholder="Project Name" pInputText type="text" value="{{ intern?.intern?.projectname }}" class="p-inputtext-sm"></div>
+             </div>
+            
+         
+             
+            <div class="mt20 text-center">
+              <button
+                pButton
+                pRipple
+                label="Update"
+                class="p-button-success"
+              
+              ></button>
+              <button
+                pButton
+                pRipple
+                type="reset"
+                label="Reset"
+                class="p-button-raised ml20"
+              ></button>
+            </div>
+          </form>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+

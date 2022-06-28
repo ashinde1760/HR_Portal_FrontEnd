@@ -1,0 +1,18 @@
+.custom-accordion::ng-deep *{
+    background-color:  #d49dc4e7 !important;
+    color: white;
+   
+}
+
+
+
+.custom-table2::ng-deep * {
+    background-color:  #f5f3f4e7  !important;
+    color: black !important;
+ }
+
+ .custom-dialog::ng-deep *{
+    color:#8b2f65e7 !important ;
+      
+   }
+ 

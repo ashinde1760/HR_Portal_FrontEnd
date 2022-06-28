@@ -1,0 +1,516 @@
+<br>
+<p-accordion>
+  <p-accordionTab header="Leave Requests" [selected]="true" class="custom-accordion">
+        <div class="card" >
+          <p-table
+           class="custom-table2"
+          #dt
+            [value]="leavesData"
+            styleClass="p-datatable-sm"
+            responsiveLayout="scroll"
+            [rows]="5"
+    [paginator]="true"
+    [globalFilterFields]="[
+    'username',
+      'reason',
+      'leavetype'
+   
+    ]"
+   
+    [rowHover]="true"
+    dataKey="id"
+          >
+            <ng-template pTemplate="caption">
+  
+             
+              <div class="p-d-flex p-ai-center p-jc-between">
+                <div class="div1"><h3  class="div1-h2"> Leave Requests</h3>
+
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search" style="color: white !important;"></i>
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt2.filterGlobal(getEventValue($event), 'contains')"
+                      placeholder="Search..."
+                      class="p-inputtext-sm"
+                    />
+                  </span></div>
+                
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr class="leave-header">
+                <th></th>
+               
+                <th>Sr.No.</th>
+                <th>Employee/Intern Id</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th pSortableColumn="reason">Reason</th>
+                <th pSortableColumn="leavetype">Leave Type</th>
+                <th>Accept/Reject</th>
+                <th>Comment</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-leavesData let-i = "rowIndex">
+              <tr *ngIf="leavesData.grantedOption == null">
+               
+                 
+                <td></td>
+                
+                <td>{{i+1}}</td>
+                <td>{{leavesData.username}}</td>
+                <td>{{ leavesData.fromDate| date: "MMMM d, y"  }}</td>
+                <td>{{ leavesData.toDate| date: "MMMM d, y"  }}</td>
+                <td>
+                  <textarea style="color: black;" readonly cols="16" rows="2" [value]="leavesData.reason" pInputTextarea></textarea>
+                </td>
+                <td>{{ leavesData.leavetype }}</td>
+                <td >
+                  <div class="btn">
+                    <p-button
+                    [disabled]='leavesData.grantedOption === (leaveAccept||leaveReject)'
+                      (onClick)="leaveAccepted(leavesData,leavesData.id)"
+                    
+                      label="Accept"
+                      icon="pi pi-check"
+                      styleClass="p-button-sm p-button-secondary"
+                    ></p-button>
+                    &nbsp;
+                    <p-button
+                    [disabled]='leavesData.grantedOption === ( leaveReject)'
+                      (onClick)="leaveRejected(leavesData,leavesData.id)"
+                      label="Reject"
+                      icon="pi pi-times"
+                      styleClass="p-button-sm p-button-secondary"
+                    ></p-button>
+                  </div>
+                </td>
+                <td>
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="leavesData.comment"
+                    placeholder="If Rejeted, Comment Here!!"
+                    style="color: black;"
+                  />
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+  </p-accordionTab>
+    </p-accordion>
+
+<!-- project Table starts  from here -->
+<!-- Dialog box to add Client -->
+<p-dialog
+  [(visible)]="projectDialogue"
+  [style]="{ width: '800px' }"
+  header="Add Project!"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="bootstrap-wrapper">
+      <div class="container">
+        <div class="row">
+         <div class="col-md-6">
+          <div class="p-field mt20">
+            <label for="name">Name Of Project</label>
+            <input
+                class="mt10"
+              type="text"
+              pInputText
+              id="name"
+              [(ngModel)]="project.name"
+              required
+              autofocus
+          
+            />
+            <div class="p-field mt40">
+              <label for="mentor">Mentor</label>
+              <input
+              class="mt10"
+                type="text"
+                pInputText
+                id="mentor"
+                [(ngModel)]="project.mentor"
+                required
+                autofocus
+              
+              />
+            </div>
+
+           
+            <div class="p-field mt40">
+              <label for="dos">Date Of Starting</label>
+              <p-calendar
+                      dateFormat="dd/mm/yy"
+                      placeholder="Select"
+                      [(ngModel)]="project.dateOfStarting"
+                      [readonlyInput]="true"
+                      name="toDate"
+                      inputId="icon2"
+                      [showIcon]="true"
+                      appendTo="body"
+                    ></p-calendar>
+            </div>
+          </div>
+
+         </div>
+
+         <div class="col-md-6">
+          <div class="p-field mt20">
+            <label for="promanager">Project Manager</label>
+            <input
+            class="mt10"
+              type="text"
+              pInputText
+              id="promanager"
+              [(ngModel)]="project.projectManager"
+              required
+              autofocus
+            
+            />
+            <div class="p-field mt40">
+              <label for="intern">Intern</label>
+              <input
+              class="mt10"
+                type="text"
+                pInputText
+                id="intern"
+                [(ngModel)]="project.intern"
+                required
+                autofocus
+          
+              />
+            </div>
+
+            
+              <div class="p-field mt40">
+                <label for="doe">Date Of Submission</label>
+                <p-calendar
+                dateFormat="dd/mm/yy"
+                placeholder="Select"
+                [(ngModel)]="project.dateOfSubmission"
+                [readonlyInput]="true"
+                name="toDate"
+                inputId="icon2"
+                [showIcon]="true"
+                appendTo="body"
+              ></p-calendar>
+            </div>
+          </div>
+
+         </div>
+
+        </div>
+        <div class="p-field mt40">
+          <label for="updates">Updates</label>
+          <textarea
+          pInputTextarea
+          rows="2"
+          cols="20"
+          class="mt10"
+            type="text"
+           
+            id="updates"
+            [(ngModel)]="project.updates"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveClient()"
+    ></button>
+    <!-- <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button> -->
+  </ng-template>
+</p-dialog>
+<p-toast></p-toast>
+
+<br />
+<br />
+
+
+<!-- Table to show project data -->
+<p-accordion>
+  <p-accordionTab header="Project Details" [selected]="true" class="custom-accordion">
+<div class="custom-table2" >
+  <p-table
+ 
+    styleClass="p-datatable-sm"
+    #dt2
+    [value]="projectData"
+    [rows]="5"
+    [paginator]="true"
+    [globalFilterFields]="['name']"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <div class="p-m-0">
+         <h3 class="div1-h2"> Project Details</h3>
+
+          <span class="p-input-icon-left ml10">
+            <i class="pi pi-search" style="color: white !important;"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt2.filterGlobal(getEventValue($event), 'contains')"
+              placeholder="Search..."
+              class="p-inputtext-sm"
+            />
+          </span>
+          <p-button
+            
+            label="Add Project"
+            icon="pi pi-plus"
+            (click)="addProject()"
+            class="custom-btn"
+            
+          ></p-button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th ></th>
+                  <th>Sr.No.</th>
+        <th pSortableColumn="name">Project</th>
+
+        <th pSortableColumn="upadtes">Updates</th>
+        <th pSortableColumn="dos">Date Of Starting</th>
+        <th pSortableColumn="doe">Date Of Ending</th>
+        <th>Action's</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-project1 let-i ="rowIndex">
+      <tr>
+          <td></td>
+        <td>{{i+1}}</td>
+        <td>{{ project1.name }}</td>
+        <td>{{ project1.updates }}</td>
+        <td>{{ project1.dateOfStarting| date: "MMMM d, y"  }}</td>
+        <td>{{ project1.dateOfSubmission| date: "MMMM d, y"  }}</td>
+
+        <td>
+        <div class="btn1">
+          <p-button
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          (click)="editClient(project1)"
+          class="p-button-rounded p-button-secondary  p-mr-2"
+   
+        ></p-button>
+        &nbsp;
+        <p-button
+          pButton
+          pRipple
+          icon="pi pi-trash"
+          (click)="deleteClient(project1.id)"
+          class="p-button-rounded p-button-secondary p-mr-2"
+        ></p-button>
+        </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between" style="color:purple;">
+        In total there are {{ projectData ? projectData.length : 0 }} projects
+      </div>
+    </ng-template>
+  </p-table>
+  </div>
+</p-accordionTab>
+</p-accordion>
+
+  <!-- for Leaves Table -->
+  <br>
+  <br>
+
+  <p-accordion>
+    <p-accordionTab header="Bill Details" [selected]="true" class="custom-accordion">
+   <div class="custom-table2">
+    <p-table
+    [value]="billsData"
+    [rows]="5"
+    [paginator]="true"
+    styleClass="p-datatable-sm"
+    responsiveLayout="scroll"
+    [globalFilterFields]="['filename']"
+    [rowHover]="true"
+    dataKey="id"
+    #dt3
+  >
+ 
+    <ng-template pTemplate="caption">
+      <div><h3 class="div1-h2">Bills</h3>
+       <span class="p-input-icon-left ml10">
+         <i style="color: white !important;" class="pi pi-search"></i>
+         <input
+           pInputText
+           type="text"
+           (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+           placeholder="Search..."
+           class="p-inputtext-sm"
+         />
+         </span>
+       <p-button
+       label="Add Bill"
+       icon="pi pi-plus"
+       class="custom-btn"
+       style="color: white"
+       (click)="addBill()"
+     ></p-button>
+ 
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr class="leave-header">
+        <th></th>
+       
+        <th>Sr.No.</th>
+        <th>Amount</th>
+        <th>Reason</th>
+        <th>Attachement</th>
+        <th>Approve</th>
+        <th></th>
+        
+  
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-billsData let-i = "rowIndex">
+      <tr *ngIf="billsData.approveOption == ''">
+        <td></td>
+        
+        <td>{{i+1}}</td>
+        <td> {{ billsData.amount|currency:'INR'}}</td>
+        <td>{{billsData.reason}}</td>
+        <td> {{billsData.filename}}</td>
+        <td>  <div class="btn">
+          <p-button
+     
+            (onClick)="billsAccepted(billsData,billsData.billsId)"
+            label="Yes"
+            icon="pi pi-check"
+            styleClass="p-button-sm p-button-secondary"
+          ></p-button>
+          &nbsp;
+          <p-button
+          (onClick)=" billsRejected(billsData,billsData.billsId)"
+            label="No"
+            icon="pi pi-times"
+            styleClass="p-button-sm p-button-secondary"
+          ></p-button>
+        </div></td>
+        <td [ngStyle]="{display:'flex',alignItems:'center',justifyContent:'space-between'}"> 
+                  
+         <button
+         pButton
+         pRipple
+         label="Download"
+         icon="pi pi-download"
+         class="p-button-text"
+         (click)="downloadFile(billsData.filename)"
+       ></button>
+   </td>
+        
+      </tr>
+      <div *ngIf="message" class="alert alert-success" role="alert">{{ message }}</div>
+ <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{ errorMsg }}</div>
+ 
+    </ng-template>
+   </p-table>
+   </div>
+  </p-accordionTab>
+</p-accordion>
+
+<!-- for add bill dialog box -->
+<p-dialog
+  [(visible)]="billsDialogue"
+  [style]="{ width: '600px' }"
+  header="Bill Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="p-field mt10">
+      <label for="currency-india">Amount</label>
+      <p-inputNumber [(ngModel)]="bill.amount" mode="currency" inputId="currency-india" currency="INR" currencyDisplay="code" locale="en-IN" class="mt10">
+      </p-inputNumber>
+    </div>
+
+    <div class="p-field mt10">
+      <label for="reason" >Reason</label>
+      <input     pInputText   placeholder="Enter Reason .." [(ngModel)]="bill.reason" inputId = "reason" class="mt10"/>
+     
+    </div>
+    
+    <div class="p-field mt20">
+      <label for="dos">Attachement File</label>
+      <input
+      class="mt10"
+       
+        type="file"
+        pInputText
+        id="dos"
+        required
+        autofocus
+        (change)="selectFile($event)"
+      />
+
+      <!-- <button (click)="uploadFile()" [disabled]="!selectedFiles" >Upload</button> -->
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideBillDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="uploadFile()"
+    ></button>
+    <!-- <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button> -->
+  </ng-template>
+</p-dialog>
+
+
+
+
+
+
+

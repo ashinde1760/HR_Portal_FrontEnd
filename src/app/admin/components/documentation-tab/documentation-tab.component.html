@@ -1,0 +1,278 @@
+<div class="card">
+  <p-tabView styleClass="tabview-custom" class="custom-tabview">
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <i style="color: white ; " class="pi pi-user"></i>
+        <span style="color: white; margin-left: 4px;  ">Employee</span>
+      </ng-template>
+      <p-accordion >
+        <p-accordionTab header="Template For Documents" [selected]="true" class="custom-accordion" >
+          <div class="bootstrap-wrapper">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <p-card header="Upload" styleClass="bgcolor">
+                    <input
+                      class="p-inputtext-sm"
+                      type="file"
+                      accept="application/pdf"
+                      pInputText
+                      id="dos"
+                      required
+                      autofocus
+                      (change)="selectFile($event)"
+                    />
+                    &nbsp;
+                    <button
+                      pButton
+                      (click)="uploadTemplate()"
+                      pRipple
+                      label="Upload"
+                      icon="pi pi-upload"
+                      class="p-button-text"
+                      style="color: rgba(221, 26, 68)"
+                    ></button>
+                  </p-card>
+                </div>
+                <div class="col-md-6">
+                  <p-card header="Download" styleClass="bgcolor">
+                 
+                      <ul *ngFor="let item of templateData">
+                        <li class="sizes">
+                          <div
+                            class="row"
+                          
+                          >
+                           <input type="text" value="{{item.filename}}" style="margin-left: 10px;">
+                            <p-button
+                              styleClass="p-button-sm"
+                              icon="pi pi-download"
+                              (click)="downloadTemplate(item.filename)"
+                            >
+                            </p-button>
+
+                            <p-button
+                              styleClass="p-button-sm"
+                              icon="pi pi-times"
+                              (click)="deleteTemplate(item.id)"
+                            >
+                            </p-button>
+                          </div>
+                        </li>
+                      </ul>
+                  
+                  </p-card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+      <br />
+      <br />
+      <div class="custom-table2">
+      <p-table
+        #dt
+        [value]="employeeData"
+        [rows]="5"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'filename', 'username']"
+        responsiveLayout="scroll"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            <div class="div1"><h3 style=" background-color: #bb508ee7 !important ; color: white !important; display: table !important; padding: 6px !important;" > Upload Document!!</h3>
+
+              <span class="p-input-icon-left">
+                <i class="pi pi-search" style="color: white !important;"></i>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+                  placeholder="Search..."
+                  class="p-inputtext-sm"
+                />
+              </span></div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th>Sr.No.</th>
+            <th pSortableColumn="name">Name</th>
+            <th pSortableColumn="empId">Employee Id</th>
+            <th pSortableColumn="docs">Official Documents</th>
+            <th pSortableColumn="docs">Download</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-element let-i="rowIndex">
+          <tr>
+            <td></td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ element.name }}</td>
+            <td>{{ element.username }}</td>
+            <td>
+              <input
+                class="p-inputtext-sm"
+                type="file"
+                pInputText
+                accept="application/pdf"
+                id="dos"
+                required
+                autofocus
+                (change)="selectFile($event)"
+              />
+              &nbsp;
+              <button
+                style="display: contents"
+                pButton
+                pRipple
+                label="Upload"
+                icon="pi pi-upload"
+                class="p-button-text"
+                (click)="uploadFile(element.id)"
+                style="color: #bb508ee7!important;"
+              ></button>
+            </td>
+            <td
+              [ngStyle]="{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }"
+            >
+              <span>{{ element.fileName }}</span>
+              &nbsp;
+              <button
+                pButton
+                pRipple
+                label="Download"
+                icon="pi pi-download"
+              
+                class=" p-button-help p-button-text"
+                (click)="downloadFile(element.fileName)" 
+                style="color: #bb508ee7!important;"
+              ></button>
+
+              
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are
+            {{ employeeData ? employeeData.length : 0 }} Employees..
+          </div>
+        </ng-template>
+      </p-table>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Header II">
+      <ng-template pTemplate="header">
+        <i style="color: white ; " class="pi pi-user"></i>
+        <span style="color: white; margin-left: 4px;  ">Intern</span>
+      </ng-template>
+   <div class="custom-table2">
+        <p-table
+        #dt1
+        [value]="internData"
+        [rows]="5"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'filename', 'username']"
+        responsiveLayout="scroll"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            <div class="div1"><h3 style=" background-color: #bb508ee7 !important ; color: white !important; display: table !important; padding: 6px !important;" > Upload Document!!</h3>
+
+              <span class="p-input-icon-left">
+                <i class="pi pi-search" style="color: white !important;"></i>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+                  placeholder="Search..."
+                  class="p-inputtext-sm"
+                />
+              </span></div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th>Sr.No.</th>
+            <th pSortableColumn="name">Name</th>
+            <th pSortableColumn="empId">Intern Id</th>
+            <th pSortableColumn="docs">Official Documents</th>
+            <th pSortableColumn="docs">Download</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-element let-i="rowIndex">
+          <tr>
+            <td></td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ element.name }}</td>
+            <td>{{ element.username }}</td>
+            <td>
+              <input
+                class="p-inputtext-sm"
+                type="file"
+                accept="application/pdf"
+                pInputText
+                id="dos"
+                required
+                autofocus
+                (change)="selectFile($event)"
+              />
+              &nbsp;
+              <button
+                pButton
+                pRipple
+                label="Upload"
+                icon="pi pi-upload"
+                class="p-button-text"
+                (click)="uploadFileIntern(element.id)"
+                style="color: #bb508ee7!important;"
+              ></button>
+            </td>
+            <td
+              [ngStyle]="{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }"
+            >
+              <span>{{ element.fileName }}</span>
+              &nbsp;
+              <button
+                pButton
+                pRipple
+                label="Download"
+                icon="pi pi-download"
+                class="p-button-text"
+                (click)="downloadFile(element.fileName)"
+                style="color: #bb508ee7!important;"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are
+            {{ employeeData ? employeeData.length : 0 }} Interns..
+          </div>
+        </ng-template>
+      </p-table>
+   </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

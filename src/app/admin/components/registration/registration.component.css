@@ -1,0 +1,54 @@
+.custom-color{
+    background-color: rgb(172, 165, 166);
+    color: rgb(10, 235, 255);
+}
+
+.custom-tabview::ng-deep *{
+    background-color:  #d49dc4e7 !important;
+    color: white;
+   
+}
+
+:host ::ng-deep p-card  .p-inputgroup input {
+  
+    background-color:  #f5f3f4e7  !important;
+    color:#bb508ee7 !important ;
+   
+}
+
+:host ::ng-deep p-card  .p-inputgroup  label {
+  
+    background-color:  #f5f3f4e7  !important;
+    color:#a1989de7 !important ;
+    padding: 2px !important;
+} 
+:host ::ng-deep p-card  .p-inputgroup  input {
+  
+
+    color:black !important ;
+   
+} 
+
+:host ::ng-deep .custom-btn * {
+    color: white !important;
+    background-color:#d49dc4e7 !important ;
+    border-color: #d8d3d6e7 !important;
+  
+ 
+
+}
+
+:host ::ng-deep .bgcolor * {
+    background-color: #bb508ee7!important;
+  
+}
+.invalid-feedback::ng-deep *{
+  
+    color: wheat;
+   
+}
+
+
+
+
+

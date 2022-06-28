@@ -1,0 +1,559 @@
+<div class="card">
+  <p-tabView styleClass="tabview-custom" class= "custom-accordion">
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+
+    
+        <i style="color: white; " class="pi pi-user"></i>
+        <span style="color: white; margin-left: 4px;  ">Employee</span>
+      </ng-template>
+    <div class = "custom-table2">
+      <p-table
+      #dt
+      [value]="employeeData"
+      [rows]="5"
+      [paginator]="true"
+      [globalFilterFields]="['name']"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-ai-center p-jc-between">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th></th>
+          <th>Sr.No.</th>
+          <th pSortableColumn="name">Name</th>
+          <th pSortableColumn="name">Employee Id</th>
+          <th pSortableColumn="name">Designation</th>
+          <th pSortableColumn="name">Location</th>
+          <th pSortableColumn="sick">Review</th>
+          <th pSortableColumn="earned">Action Taken</th>
+          <th>Update</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-element let-i="rowIndex">
+        <tr>
+          <td></td>
+          <td>{{ i + 1 }}</td>
+
+          <td>{{ element.name }}</td>
+          <td>{{element.username}}</td>
+          <td>{{element.designation}}</td>
+          <td>{{element.location}}</td>
+          <td>{{ element.review }}</td>
+        
+          <td>{{ element.actionTaken }}</td>
+          <td>
+            <button
+              pButton
+              pRipple
+              (click)="editEmployee(element)"
+              type="button"
+              icon="pi pi-check"
+              class="p-button-rounded p-button-success"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <!-- In total there are {{ employeeData ? employeeData.length : 0 }} Employees.. -->
+        </div>
+      </ng-template>
+    </p-table>
+
+    
+      <!-- for dialog box -->
+
+      <p-dialog
+        [(visible)]="employeeDialogue"
+        [style]="{ width: '550px', height: '400px' }"
+        header="Add Review"
+        [modal]="true"
+        styleClass="p-fluid"
+        class = "custom-dialog"
+      >
+        <ng-template pTemplate="content">
+          <hr />
+          <div class="container">
+            <div class="row mt20">
+              <div class="col-md-4 offset-md-2">
+                <div class="grid p-fluid" hidden>
+                  <div class="col-12 md:col-2">
+                    <div class="p-inputgroup">
+                      <div class="mt10 mr20"><strong>Name</strong></div>
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                      <div></div>
+                      <input
+                        name="name"
+                        placeholder="Name"
+                        pInputText
+                        type="text"
+                        [(ngModel)]="employee.name"
+                        class="p-inputtext-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid p-fluid mt20" hidden>
+                  <div class="col-12 md:col-2">
+                    <div class="p-inputgroup">
+                      <div class="mt10 mr20"><strong>Mobile</strong></div>
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                      <div></div>
+                      <input
+                        name="name"
+                        placeholder="Name"
+                        pInputText
+                        type="text"
+                        [(ngModel)]="employee.mobile"
+                        class="p-inputtext-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="grid p-fluid mt20" hidden>
+                  <div class="col-12 md:col-2">
+                    <div class="p-inputgroup">
+                      <div class="mt10 mr20"><strong>Email</strong></div>
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                      <div></div>
+                      <input
+                        name="email"
+                        placeholder="Name"
+                        pInputText
+                        type="text"
+                        [(ngModel)]="employee.email"
+                        class="p-inputtext-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="grid p-fluid mt20" hidden>
+                  <div class="col-12 md:col-2">
+                    <div class="p-inputgroup">
+                      <div class="mt10 mr20"><strong>Designation</strong></div>
+                      <div></div>
+                      <input
+                        name="designation"
+                        placeholder="Name"
+                        pInputText
+                        type="text"
+                        [(ngModel)]="employee.designation"
+                        class="p-inputtext-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid p-fluid mt20" hidden>
+                  <div class="col-12 md:col-2">
+                    <div class="p-inputgroup">
+                      <div class="mt10 mr20"><strong>Department</strong></div>
+                      <div></div>
+                      <input
+                        name="department"
+                        placeholder="Name"
+                        pInputText
+                        type="text"
+                        [(ngModel)]="employee.department"
+                        class="p-inputtext-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="grid p-fluid mt20" hidden>
+                  <div class="col-12 md:col-2">
+                    <div class="p-inputgroup">
+                      <div class="mt10 mr20"><strong>Location</strong></div>
+                      &nbsp; &nbsp; &nbsp;
+
+                      <div></div>
+                      <input
+                        name="name"
+                        placeholder="Name"
+                        pInputText
+                        type="text"
+                        [(ngModel)]="employee.location"
+                        class="p-inputtext-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="grid p-fluid mt20">
+                    <div class="col-12 md:col-2">
+                      <div class="p-inputgroup">
+                        <div class="mt10 mr20">
+                          <strong>Review</strong>
+                        </div>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+
+                        <textarea
+                          cols="30"
+                          rows="2"
+                          name="review"
+                          placeholder="Write Review"
+                          pInputText
+                          type="text"
+                          [(ngModel)]="employee.review"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid p-fluid mt40">
+                    <div class="col-12 md:col-2">
+                      <div class="p-inputgroup">
+                        <div class="mt10 mr20">
+                          <strong>Action Taken</strong>
+                        </div>
+                        &nbsp; &nbsp; &nbsp;
+                        <textarea
+                          cols="30"
+                          rows="2"
+                          name="actionTaken"
+                          placeholder="action taken"
+                          pInputText
+                          type="text"
+                          [(ngModel)]="employee.actionTaken"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            pRipple
+            label="Cancel"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="hideDialog()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="Save"
+            icon="pi pi-check"
+            class="p-button-text"
+            (click)="updateEmployee()"
+          ></button>
+          <!-- <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success"></button> -->
+        </ng-template>
+      </p-dialog>
+      <p-toast></p-toast>
+    </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Header II">
+      <ng-template pTemplate="header">
+        <span style="color: white; margin-left: 4px;  ">Intern</span>
+
+      </ng-template>
+      <div class="custom-table2">
+         <p-table
+            #dt
+            [value]="internData"
+            [rows]="5"
+            [paginator]="true"
+            [globalFilterFields]="['name']"
+            responsiveLayout="scroll"
+            [rowHover]="true"
+            dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+          >
+            <ng-template pTemplate="caption">
+              <div class="p-ai-center p-jc-between">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input
+                    pInputText
+                    type="text"
+                    (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+                    placeholder="Search..."
+                  />
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th></th>
+                <th>Sr.No.</th>
+                <th pSortableColumn="name">Name</th>
+                <th pSortableColumn="name">Intern Id</th>
+            <th pSortableColumn="name">Mentor</th>
+            <th pSortableColumn="name">Location</th>
+                <th pSortableColumn="sick">Review</th>
+                <th pSortableColumn="earned">Action Taken</th>
+                <th>Update</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-element let-i="rowIndex">
+              <tr>
+                <td></td>
+                <td>{{ i + 1 }}</td>
+
+                <td>{{ element.name }}</td>
+                 <td>{{element.username}}</td>
+                 <td>{{element.mentor}}</td>
+                 <td>{{element.location}}</td>
+                <td>
+                  {{ element.review }}
+                </td>
+                <td>
+                  {{ element.actionTaken }}
+                </td>
+                <td>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-check"
+                    class="p-button-rounded p-button-success"
+                    (click)="editIntern(element)"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                <!-- In total there are {{ employeeData ? employeeData.length : 0 }} Employees.. -->
+              </div>
+            </ng-template>
+          </p-table>
+          <!-- for dialog box for intern -->
+
+          <p-dialog
+            [(visible)]="internDialogue"
+            [style]="{ width: '550px', height: '400px' }"
+            header="Add Review"
+            [modal]="true"
+            styleClass="p-fluid"
+            class = "custom-dialog"
+          >
+            <ng-template pTemplate="content">
+              <hr />
+              <div class="container">
+                <div class="row mt20">
+                  <div class="col-md-4 offset-md-2">
+                    <div class="grid p-fluid" hidden>
+                      <div class="col-12 md:col-2">
+                        <div class="p-inputgroup">
+                          <div class="mt10 mr20"><strong>Name</strong></div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                          <div></div>
+                          <input
+                            name="name"
+                            placeholder="Name"
+                            pInputText
+                            type="text"
+                            [(ngModel)]="intern.name"
+                            class="p-inputtext-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="grid p-fluid mt20" hidden>
+                      <div class="col-12 md:col-2">
+                        <div class="p-inputgroup">
+                          <div class="mt10 mr20"><strong>Mobile</strong></div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                          <div></div>
+                          <input
+                            name="name"
+                            placeholder="Name"
+                            pInputText
+                            type="text"
+                            [(ngModel)]="intern.mobile"
+                            class="p-inputtext-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="grid p-fluid mt20" hidden>
+                      <div class="col-12 md:col-2">
+                        <div class="p-inputgroup">
+                          <div class="mt10 mr20"><strong>Email</strong></div>
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                          <div></div>
+                          <input
+                            name="email"
+                            placeholder="Name"
+                            pInputText
+                            type="text"
+                            [(ngModel)]="intern.email"
+                            class="p-inputtext-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="grid p-fluid mt20" hidden>
+                      <div class="col-12 md:col-2">
+                        <div class="p-inputgroup">
+                          <div class="mt10 mr20"><strong>Mentor</strong></div>
+                          <div></div>
+                          <input
+                            name="Mentor"
+                            placeholder="Name"
+                            pInputText
+                            type="text"
+                            [(ngModel)]="intern.mentor"
+                            class="p-inputtext-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="grid p-fluid mt20" hidden>
+                      <div class="col-12 md:col-2">
+                        <div class="p-inputgroup">
+                          <div class="mt10 mr20">
+                            <strong>Project Name</strong>
+                          </div>
+                          <div></div>
+                          <input
+                            name="Project Name"
+                            placeholder="proName"
+                            pInputText
+                            type="text"
+                            [(ngModel)]="intern.projectname"
+                            class="p-inputtext-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="grid p-fluid mt20" hidden>
+                      <div class="col-12 md:col-2">
+                        <div class="p-inputgroup">
+                          <div class="mt10 mr20"><strong>Location</strong></div>
+                          &nbsp; &nbsp; &nbsp;
+
+                          <div></div>
+                          <input
+                            name="location"
+                            placeholder="location"
+                            pInputText
+                            type="text"
+                            [(ngModel)]="intern.location"
+                            class="p-inputtext-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="grid p-fluid mt20" hidden>
+                      <div class="col-12 md:col-2">
+                        <div class="p-inputgroup">
+                          <div class="mt10 mr20"><strong>Address</strong></div>
+                          &nbsp; &nbsp; &nbsp;
+
+                          <div></div>
+                          <input
+                            name="address"
+                            placeholder="address"
+                            pInputText
+                            type="text"
+                            [(ngModel)]="intern.address"
+                            class="p-inputtext-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="grid p-fluid mt20">
+                        <div class="col-12 md:col-2">
+                          <div class="p-inputgroup">
+                            <div class="mt10 mr20">
+                              <strong>Review</strong>
+                            </div>
+                            &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; 
+                            <textarea
+                              cols="30"
+                              rows="2"
+                              name="review"
+                              placeholder="Write Review"
+                              pInputText
+                              type="text"
+                              [(ngModel)]="intern.review"
+                            ></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="grid p-fluid mt40">
+                        <div class="col-12 md:col-2">
+                          <div class="p-inputgroup">
+                            <div class="mt10 mr20">
+                              <strong>Action Taken</strong>
+                            </div>
+                            &nbsp; &nbsp; &nbsp;
+
+                            <textarea
+                              cols="30"
+                              rows="2"
+                              name="review"
+                              placeholder="Write Review"
+                              pInputText
+                              type="text"
+                              [(ngModel)]="intern.actionTaken"
+                            ></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button
+                pButton
+                pRipple
+                label="Cancel"
+                icon="pi pi-times"
+                class="p-button-text"
+                (click)="hideDialog()"
+              ></button>
+              <button
+                pButton
+                pRipple
+                label="Save"
+                icon="pi pi-check"
+                class="p-button-text"
+                (click)="updateIntern()"
+              ></button>
+            </ng-template>
+          </p-dialog>
+          <p-toast></p-toast>
+ 
+      </div> </p-tabPanel
+  ></p-tabView>
+</div>

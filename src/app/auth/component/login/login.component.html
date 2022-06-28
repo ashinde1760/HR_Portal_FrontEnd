@@ -1,0 +1,58 @@
+
+<app-navbar></app-navbar>
+<div class="section">
+
+    
+<div class="bootstrap-wrapper">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mt40">
+             <p-card styleClass="custom-card" class="text-center" header="Login Here!!!">
+                 <hr>
+             <form (ngSubmit)="formSubmit()" >
+                <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon custom-color">
+                            <i class="pi pi-user"></i>
+                        </span>
+                        <span class="p-float-label ">
+                            <input type="text" id="inputgroup" pInputText [(ngModel)]="loginData.username" name = "username"> 
+                            <label for="inputgroup">Enter Id</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-field p-col-12 p-md-4 mt40">
+                    <div class="p-inputgroup">
+                        <span  class="p-inputgroup-addon custom-color">
+                            <i class="pi pi-key"></i>
+                        </span>
+                        <span class="p-float-label">
+                            <input type="password" id="inputgroup2" pInputText [(ngModel)]="loginData.password" name="password"> 
+                            <label for="inputgroup">Enter Password</label>
+                        </span>
+                    </div>
+                </div>
+              <div class="mt20 text-center" >
+                <button style="background-color: #d49dc4e7;" pButton pRipple type="submit" label="Login" class="p-button-secondary"> </button>
+                <button  style="background-color: #d49dc4e7;"   pButton pRipple type="reset" label="Reset" class="p-button-secondary ml20"> </button>
+              
+              </div>
+             </form>
+
+       </p-card>
+    
+        </div> 
+    
+    
+        
+       
+    </div>
+    
+    </div>
+    
+    </div>
+
+   
+
+</div>
+
